@@ -1,0 +1,20 @@
+{
+    "name": "addvilz/phpspec-code-coverage",
+    "description": "Opinionated code coverage for PHPSpec",
+    "require": {
+        "phpunit/php-code-coverage": "~3.2",
+        "phpspec/phpspec": "~2.0"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Addvilz",
+            "email": "mrtreinis@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}
