@@ -60,8 +60,11 @@ class Reporter
             }
 
             $classCoverage = $this->getClassCoverage($item->getClassesAndTraits());
+            $totalCoverage = $this->getTotalCoverage($classCoverage);
             $output .= $this->renderClassCoverage($classCoverage);
-            $output .= $this->renderCodeCoverage($reportLines, $widestLine);
+            if (!$totalCoverage) {
+                $output .= $this->renderCodeCoverage($reportLines, $widestLine);
+            }
         }
 
         return $output;
@@ -203,5 +206,16 @@ class Reporter
         }
 
         return $output;
+    }
+
+    private function getTotalCoverage(array $classCoverage)
+    {
+        foreach ($classCoverage as $class) {
+            if ($class['methodsCovered'] < $class['methodCount']) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
