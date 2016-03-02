@@ -1,0 +1,4 @@
+extensions:
+    - Addvilz\PhpSpecCover\Extension
+phpspec_cover:
+    max_specs: 1

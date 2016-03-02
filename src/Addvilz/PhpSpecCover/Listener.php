@@ -1,6 +1,6 @@
 <?php
 
-namespace Addvilz\PhpSpecCodeCoverage;
+namespace Addvilz\PhpSpecCover;
 
 use PhpSpec\Console\IO;
 use PhpSpec\Event\ExampleEvent;
@@ -20,6 +20,11 @@ class Listener implements EventSubscriberInterface
     private $io;
 
     /**
+     * @var Reporter
+     */
+    private $reporter;
+
+    /**
      * @var int
      */
     private $maxSpecs;
@@ -37,12 +42,14 @@ class Listener implements EventSubscriberInterface
     /**
      * @param \PHP_CodeCoverage $coverage
      * @param IO                $io
+     * @param Reporter          $reporter
      * @param int               $maxSpecs
      */
-    public function __construct(\PHP_CodeCoverage $coverage, $io, $maxSpecs)
+    public function __construct(\PHP_CodeCoverage $coverage, IO $io, Reporter $reporter, $maxSpecs)
     {
         $this->coverage = $coverage;
         $this->io = $io;
+        $this->reporter = $reporter;
         $this->maxSpecs = $maxSpecs;
     }
 
@@ -65,16 +72,14 @@ class Listener implements EventSubscriberInterface
         $example = $event->getExample();
         $resource = $example
             ->getSpecification()
-            ->getResource()
-        ;
+            ->getResource();
 
         $this->coverage->filter()->setWhitelistedFiles([]);
 
         $this
             ->coverage
             ->filter()
-            ->addFileToWhitelist($resource->getSrcFilename())
-        ;
+            ->addFileToWhitelist($resource->getSrcFilename());
 
         $this->coverage->start($resource->getSrcClassname());
     }
@@ -99,15 +104,17 @@ class Listener implements EventSubscriberInterface
             return;
         }
 
-        $report = new CLIReporter(35, 70, true, false);
-        $this->output[] = $report->process($this->coverage, $this->io->isDecorated());
+        $this->output[] = $this
+            ->reporter
+            ->getOutput($this->coverage)
+        ;
     }
 
     public function shutdown()
     {
         if (!$this->enabled) {
             $this->io->writeln(sprintf(
-                'Code coverage disabled, too many specs to cover (Max %d)',
+                '<bg=yellow;fg=black>Code coverage disabled, too many specs to cover (Max %d)</>',
                 $this->maxSpecs
             ));
 

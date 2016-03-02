@@ -15,9 +15,17 @@ Features:
 
 ## Installation
 
+`composer require addvilz/phpspec-cover`
+
+## Configuration
+
+In your `phpspec.yml`:
+
 ```
 extensions:
-    - Addvilz\PhpSpecCodeCoverage\Extension
+    - Addvilz\PhpSpecCover\Extension
+phpspec_cover:
+    max_specs: 1
 ```
 
 ### Credit where credit is due

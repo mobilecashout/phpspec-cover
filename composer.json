@@ -1,5 +1,5 @@
 {
-    "name": "addvilz/phpspec-code-coverage",
+    "name": "addvilz/phpspec-cover",
     "description": "Opinionated code coverage for PHPSpec",
     "require": {
         "phpunit/php-code-coverage": "~3.2",
