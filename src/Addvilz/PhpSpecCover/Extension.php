@@ -24,7 +24,7 @@ class Extension implements ExtensionInterface
             return;
         }
 
-        $container->setShared('event_dispatcher.listeners.addvilz_code_coverage', function (ServiceContainer $container) use ($io, $options) {
+        $container->setShared('event_dispatcher.listeners.addvilz_code_coverage', function (ServiceContainer $container) use ($io) {
 
             $defaults = [
                 'max_specs' => 1
