@@ -1,4 +1,4 @@
-# addvilz/phpspec-code-coverage
+# Addvilz/phpspec-cover
 
 WIP, but working.
 
