@@ -103,6 +103,10 @@ class Listener implements EventSubscriberInterface
         if (!$this->enabled) {
             return;
         }
+        
+        if(0 !== $event->getResult()) {
+            return;
+        }
 
         $this->output[] = $this
             ->reporter
