@@ -117,11 +117,6 @@ class Listener implements EventSubscriberInterface
     public function shutdown()
     {
         if (!$this->enabled) {
-            $this->io->writeln(sprintf(
-                '<bg=yellow;fg=black>Code coverage disabled, too many specs to cover (Max %d)</>',
-                $this->maxSpecs
-            ));
-
             return;
         }
 
