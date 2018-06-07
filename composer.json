@@ -2,8 +2,8 @@
     "name": "addvilz/phpspec-cover",
     "description": "Opinionated code coverage for PHPSpec",
     "require": {
-        "phpunit/php-code-coverage": "~3.2",
-        "phpspec/phpspec": "~2.0"
+        "phpunit/php-code-coverage": "~6.0",
+        "phpspec/phpspec": "~4.3"
     },
     "license": "Apache-2.0",
     "authors": [
